@@ -50,6 +50,9 @@ nav ul li{
     flex-basis: 45%;
     min-width: 600px;
 }
+.homepage p{
+    padding-bottom: 40px;
+}
 .homepage img{
     max-width: 100%;
     padding: 50px 0;
