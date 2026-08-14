@@ -74,40 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
 }); 
 
 // --- FORM HANDLING ---
-const form = document.getElementById('contact-form'); 
+const form = document.getElementById('contact-form');
 if (form) {
-  form.addEventListener('submit', handleSubmit); 
-}
-
-function handleSubmit(event) { 
-  event.preventDefault(); 
-  
-  const name = document.getElementById('name').value; 
-  const email = document.getElementById('email').value; 
-  const message = document.getElementById('message').value; 
-  
-  // Target the custom modal elements
-  const customAlert = document.getElementById('custom-alert');
-  
-  if (customAlert) {
-    // Dynamically update the modal text to use the visitor's name
-    const alertParagraph = customAlert.querySelector('p');
-    if (alertParagraph) {
-      alertParagraph.textContent = `Thank you! I'll get back to you soon.`;
-    }
-    
-    // Launch the beautiful custom dialog box
-    customAlert.showModal();
-  }
-
-  // Clear out the user inputs inside the form fields 
-  const inputs = document.querySelectorAll('#name, #email'); 
-  inputs.forEach(input => { 
-    input.value = ''; 
-  }); 
-  
-  const textarea = document.getElementById('message'); 
-  if (textarea) {
-    textarea.value = ''; 
-  }
+  form.addEventListener('submit', () => {
+    // Let the form submit naturally to FormSubmit, but clear the fields right after
+    setTimeout(() => {
+      form.reset();
+    }, 10);
+  });
 }
