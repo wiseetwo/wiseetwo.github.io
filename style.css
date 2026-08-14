@@ -404,6 +404,18 @@ input[type=submit]:hover {
     max-width: 35ch;
 }
 
+.footer-column p a {
+    color: rgb(223, 223, 223);
+    text-decoration: none;
+    transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-column p a:hover {
+  color: #fff;
+  text-decoration: underline;
+  opacity: 0.9;
+}
+
 .footer-column h4 {
   color: #fff;
   font-size: 18px;
