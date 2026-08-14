@@ -1,8 +1,14 @@
-window.addEventListener('load' , () => { 
-  setTimeout(() => { 
-    document.querySelector('.video-screen').scrollIntoView({ behavior: 'smooth' }) 
-  }, 3000); 
-}) 
+window.addEventListener('load', () => {
+    // Force the browser back to the top instantly on load so the smooth scroll works cleanly
+    window.scrollTo(0, 0); 
+    
+    setTimeout(() => {
+        const videoSection = document.getElementById('video-screen');
+        if (videoSection) {
+            videoSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, 3000); 
+});
 
 if (window.location.hash === '#title-screen') { 
   if (history.scrollRestoration) { 
@@ -74,12 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
 }); 
 
 // --- FORM HANDLING ---
-//const form = document.getElementById('contact-form');
-//if (form) {
-  //form.addEventListener('submit', () => {
+const form = document.getElementById('contact-form');
+if (form) {
+  form.addEventListener('submit', () => {
     // Let the form submit naturally to FormSubmit, but clear the fields right after
-    //setTimeout(() => {
-      //form.reset();
-    //}, //10);
-  //});
+    setTimeout(() => {
+      form.reset();
+    }, 10);
+  });
 }
