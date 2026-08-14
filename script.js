@@ -1,31 +1,36 @@
 window.addEventListener('load', () => {
-    // 1. Temporarily allow the browser to accept code-driven scrolling
+    // 1. Check the hash inside the load event to decide the restoration mode
+    if (window.location.hash === '#title-screen') {
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+    } else {
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'auto';
+        }
+    }
+
+    // 2. Temporarily set it to auto right now so our custom timer code can move the window
     if (history.scrollRestoration) {
         history.scrollRestoration = 'auto';
     }
 
-    // 2. Force screen to the top instantly so the downward scroll has space to move
+    // 3. Force screen to the top instantly so the downward scroll has space to move
     window.scrollTo(0, 0); 
     
-    // 3. Drop down to the video after 3 seconds
+    // 4. Drop down to the video after 3 seconds
     setTimeout(() => {
         const videoSection = document.getElementById('video-screen');
         if (videoSection) {
             videoSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // 5. Restore manual mode after the scroll animation starts if the hash is #title-screen
+            if (window.location.hash === '#title-screen' && history.scrollRestoration) {
+                history.scrollRestoration = 'manual';
+            }
         }
     }, 3000); 
 });
-
-// Keep this below to safely handle standard browser click histories
-if (window.location.hash === '#title-screen') {
-    if (history.scrollRestoration) {
-        history.scrollRestoration = 'manual';
-    }
-} else {
-    if (history.scrollRestoration) {
-        history.scrollRestoration = 'auto';
-    }
-}
 
 document.addEventListener('DOMContentLoaded', () => {
     const menuCheckbox = document.getElementById('menu-checkbox');
