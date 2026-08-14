@@ -1,43 +1,51 @@
-window.addEventListener('load', () => {
-    // 1. Clear out scroll restrictions instantly on site load
-    if (history.scrollRestoration) {
-        history.scrollRestoration = 'auto';
-    }
+// 1. Immediately determine exactly HOW the user landed on the page
+const navigationEntries = performance.getEntriesByType("navigation");
+const isBrowserRefresh = navigationEntries.length > 0 && navigationEntries[0].type === "reload";
 
-    // 2. Force browser view to the exact top right away
-    window.scrollTo(0, 0); 
-    
-    // 3. Drop down to the video after 3 seconds, accounting for image layout rendering
-    setTimeout(() => {
-        const videoSection = document.getElementById('video-screen');
-        if (videoSection) {
-            // Check if element positioning is finalized by forcing a clean coordinate map
-            const targetPosition = videoSection.getBoundingClientRect().top + window.scrollY;
-            
-            // Execute fallback window scroll if standard element scroll into view fails
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
+// Detect if they are currently sitting at the top of the viewport
+const isCurrentlyAtTop = window.scrollY < 50;
 
-            // Restore manual history overrides seamlessly safely after scroll initialization
-            if (window.location.hash === '#title-screen' && history.scrollRestoration) {
-                history.scrollRestoration = 'manual';
-            }
-        }
-    }, 3000); 
-});
-
-// Safe conditional fallback check for history loads
-if (window.location.hash === '#title-screen') {
-    if (history.scrollRestoration) {
-        history.scrollRestoration = 'manual';
-    }
-} else {
-    if (history.scrollRestoration) {
-        history.scrollRestoration = 'auto';
-    }
+// Turn off default browser scroll jumping instantly
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
 }
+
+window.addEventListener('load', () => {
+    // 2. Play intro scroll ONLY if it's a fresh visit OR if they refreshed while looking at the top title screen
+    const shouldPlayIntro = !isBrowserRefresh || (isBrowserRefresh && isCurrentlyAtTop);
+
+    if (shouldPlayIntro) {
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'auto';
+        }
+        
+        // Ensure we anchor cleanly at 0,0 for the timeline initiation
+        window.scrollTo(0, 0); 
+        
+        // Execute the smooth slide-down exactly 3 seconds later
+        setTimeout(() => {
+            const videoSection = document.getElementById('video-screen');
+            if (videoSection) {
+                const targetPosition = videoSection.getBoundingClientRect().top + window.scrollY;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+
+                if (window.location.hash === '#title-screen' && history.scrollRestoration) {
+                    history.scrollRestoration = 'manual';
+                }
+            }
+        }, 3000);
+    } else {
+        // 3. If they explicitly refreshed while viewing a lower section, leave them exactly there.
+        // This stops the code from firing on scroll adjustments or asset paints.
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'auto';
+        }
+    }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     const menuCheckbox = document.getElementById('menu-checkbox');
@@ -48,11 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeMenu() {
         if (menuCheckbox && menuCheckbox.checked) {
             menuCheckbox.checked = false;
-            console.log('Menu closed successfully');
         }
     }
 
-    // Outside Click Logic
+    // Outside Click Layout Logic
     document.addEventListener('click', (event) => {
         if (event.target === menuCheckbox) return;
 
@@ -66,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Hash check initialization
     if (window.location.hash === '#title-screen') {
         closeMenu();
     }
@@ -81,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Dropdown Links
+    // Dropdown Navigation Links
     document.querySelectorAll('.nav-links a').forEach(link => {
         if (link.id === 'title-scroll') return;
         link.addEventListener('click', () => {
