@@ -1,0 +1,506 @@
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  font-family: sans-serif; 
+} 
+
+html { 
+  scroll-behavior: smooth; 
+} 
+
+body { 
+  margin: 0; 
+  padding: 0; 
+  background-color: rgb(24, 38, 54); 
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+} 
+
+/* --- NAVBAR --- */
+.navbar { 
+  all: unset; 
+  position: -webkit-sticky; 
+  position: sticky; 
+  top: 0; 
+  z-index: 1000; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 15px 30px; 
+  background-color: rgb(26, 33, 41); 
+} 
+
+.logo a { 
+  color: #fff; 
+  font-size: 24px; 
+  font-weight: bold; 
+  font-family: Arial, Helvetica, sans-serif; 
+  text-decoration: none; 
+  transition: all 0.3s ease; 
+} 
+
+.logo a:hover { 
+  opacity: 50%; 
+  cursor: pointer; 
+} 
+
+.nav-container { 
+  display: flex; 
+  align-items: center; 
+}
+
+.menu-checkbox {
+    display: none;
+}
+
+.nav-links { 
+  list-style: none; 
+  display: flex; 
+} 
+
+.navbar > :nth-child(2) { 
+  margin-left: auto; 
+} 
+
+.nav-links li { 
+  padding: 0 15px; 
+} 
+
+.nav-links a { 
+  color: #fff; 
+  font-weight: bold; 
+  font-family: Arial, Helvetica, sans-serif; 
+  text-decoration: none; 
+  font-size: 18px; 
+  transition: all 0.3s ease; 
+} 
+
+.nav-links a:hover { 
+  opacity: 50%; 
+  cursor: pointer; 
+} 
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.menu-toggle .bar {
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+/* --- TITLE PAGE --- */
+.title-screen { 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh; /* Changed height to min-height */
+  padding: 20px;
+} 
+
+.center-container { 
+  display: inline-block; 
+  text-align: center; 
+  width: 100%;
+} 
+
+.title { 
+  font-family: Helvetica, sans-serif; 
+  font-size: clamp(3rem, 10vw, 150px); /* Fluid size: Scales smoothly from 3rem up to 150px */
+  margin: 0; 
+  animation: fadeIn 2s ease-in-out 1s both; 
+  color: rgb(223, 223, 223);
+  word-wrap: break-word;
+} 
+
+@keyframes fadeIn { 
+  from { opacity: 0; } 
+  to { opacity: 1; } 
+} 
+
+/* --- VIDEO PAGE --- */
+.video-screen { 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh; /* Changed height to min-height */
+  background-color: rgb(18, 23, 29); 
+  padding: 40px 20px;
+} 
+
+.video-text { 
+  font-family: Arial, Helvetica, sans-serif; 
+  font-size: clamp(2rem, 5vw, 50px); /* Scales font for smaller screens */ 
+  margin-bottom: 80px; 
+  text-align: center; 
+  color: rgb(158, 165, 168); 
+} 
+
+.video-bg { 
+  width: 100%;
+  max-width: 900px; /* Replaced rigid 65% width with responsive boundaries */
+  background-color: rgb(20, 47, 80); 
+  padding: 20px; 
+  border-radius: 8px; 
+  display: flex; 
+} 
+
+.video-screen iframe { 
+  width: 100%; 
+  height: auto; 
+  aspect-ratio: 16/9; 
+  border: none; 
+} 
+
+/* --- INFO PAGE --- */
+.info-screen { 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh; /* Prevents overflow content cutoff */
+  background-color: rgb(32, 41, 53); 
+  padding: 60px 20px;
+} 
+
+.info-title-text { 
+  font-family: Arial, Helvetica, sans-serif; 
+  font-size: clamp(2.5rem, 6vw, 70px); /* Scales safely on mobile */
+  text-align: center; 
+  color: rgb(158, 165, 168); 
+  margin-bottom: 30px; /* Removed dangerous negative margin-top */
+} 
+
+.info-text { 
+  font-family: Arial, Helvetica, sans-serif; 
+  font-size: 1.1rem; 
+  line-height: 1.6; 
+  width: 100%;
+  max-width: 65ch; 
+  margin-bottom: 1.5rem; 
+  text-align: center; 
+  color: rgb(158, 165, 168); 
+  text-wrap: pretty; 
+} 
+
+.info-photo { 
+  width: 100%;
+  max-width: 350px; /* Prevents scaling larger than your original design */
+  aspect-ratio: 1/1; /* Keeps image perfectly circular */
+  margin-top: 30px; 
+  background-color: rgb(14, 34, 58); 
+  border: 10px solid rgb(18, 23, 29); 
+  border-radius: 50%; 
+  /* Removed extreme negative margins that smashed layouts on mobile */
+} 
+
+/* --- MERCH PAGE --- */
+.merch-screen { 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh; 
+  box-sizing: border-box; 
+  background-color: rgb(18, 23, 29); 
+  padding: 60px 20px;
+} 
+
+.merch-title { 
+  font-family: Arial, Helvetica, sans-serif; 
+  font-size: clamp(2rem, 5vw, 50px); 
+  text-align: center; 
+  color: rgb(158, 165, 168);
+  margin-top: 30px;
+  margin-bottom: 30px;
+} 
+
+
+.merch { 
+  display: grid;
+  /* Automatically columns based on card width (max 370px) */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+  justify-items: center; 
+  align-items: start; 
+  gap: 40px; 
+  padding: 40px 20px; 
+  background-color: rgb(20, 47, 80); 
+  border-radius: 10px; 
+  width: 100%;
+  max-width: 1200px;
+} 
+
+.merch-text {
+  /* Spans across all available grid columns to sit perfectly centered below them */
+  grid-column: 1 / -1; 
+  
+  font-family: Arial, Helvetica, sans-serif; 
+  font-size: 16px; 
+  line-height: 1.6; 
+  text-align: center; 
+  width: 100%;
+  max-width: 55ch; 
+  margin-top: 20px;
+  background-color: rgb(26, 33, 41); 
+  color: rgb(223, 223, 223);         
+  padding: 25px 30px;                
+  border-radius: 8px;                
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+.merch-cards { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  width: 100%;
+  max-width: 370px; /* Changed from 300px fixed width to scale with images */
+  transition: transform 0.3s ease; 
+} 
+
+.merch-cards img { 
+  width: 100%; /* Image fills card space safely */
+  height: auto !important; 
+  align-self: center; 
+  display: block; 
+} 
+
+.price-box { 
+  width: 100%; /* Matches width of parent card automatically */
+  height: auto; 
+  background-color: rgb(255, 255, 255); 
+  padding: 15px; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between; 
+  align-items: flex-start; 
+} 
+
+.price-box h3 { 
+  font-family: Arial, Helvetica, sans-serif; 
+  margin-bottom: 5px;
+} 
+
+.price-box p { 
+  font-family: Arial, Helvetica, sans-serif; 
+  font-size: 17px; 
+  color: rgb(66, 70, 71); 
+} 
+
+.merch-cards:hover { 
+  transform: scale(1.05);
+  box-shadow: 0px 7px 8px rgba(0, 0, 0, 0.3);
+}
+
+.contact-form-container {
+  width:45%;
+  margin: auto;
+  padding: 10px;
+}
+
+#contact-form h1 {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(255, 255, 255);
+}
+
+form {
+  background-color: rgb(20, 47, 80);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 50px;
+}
+
+input[type=text], input[type=email], textarea {
+  width: 100%;
+  padding: 12px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label[for = "name"], label[for = "email"], label[for = "message"] {
+  color: rgb(255, 255, 255);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+#contact-form label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: rgb(26, 33, 41);
+  color: white;
+  margin-top: 10px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  opacity: 0.8;
+}
+
+
+
+.site-footer {
+    background-color: rgb(26, 33, 41);
+    color: rgb(158, 165, 168);
+    padding: 60px 20px 20px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: auto;
+    text-align: center;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 50px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-column h3 {
+    color:#fff;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.footer-column p {
+    font-size:15px;
+    line-height: 1.6;
+    max-width: 35ch;
+}
+
+.footer-column h4 {
+    color:#fff;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    color: rgb(158, 165, 168);
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.3s ease;
+}
+
+.footer-column ul a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+}
+
+/* --- MOBILE SPECIFIC MEDIA QUERY (Under 768px wide) --- */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+  }
+  
+  .navbar > :nth-child(2) { 
+    margin-left: unset; /* Centers the navigation links on mobile screen */
+  }
+
+  .menu-toggle {
+    display: flex;
+    z-index: 1001; /* Ensures the menu toggle is above other elements */
+    height: 18px; /* Slightly smaller for mobile */
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: rgb(26, 33, 41);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+   
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-links li {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .menu-checkbox:checked ~ .nav-links {
+    max-height: 300px; /* Adjust this value based on the number of links */
+  }
+
+  .nav-links.active {
+    max-height: 300px;
+  }
+
+  .menu-checkbox:checked ~ .menu-toggle .bar:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+  }
+
+  .menu-checkbox:checked ~ .menu-toggle .bar:nth-child(2) {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  .menu-checkbox:checked ~ .menu-toggle .bar:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+  }
+
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+}
