@@ -74,12 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
 }); 
 
 // --- FORM HANDLING ---
-const form = document.getElementById('contact-form');
-if (form) {
-  form.addEventListener('submit', () => {
+//const form = document.getElementById('contact-form');
+//if (form) {
+  //form.addEventListener('submit', () => {
     // Let the form submit naturally to FormSubmit, but clear the fields right after
-    setTimeout(() => {
-      form.reset();
-    }, 10);
-  });
+    //setTimeout(() => {
+      //form.reset();
+    //}, //10);
+  //});
 }
