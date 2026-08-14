@@ -121,16 +121,24 @@
     </div> 
 
     <div class="contact-form-container"> 
-        <form id="contact-form" action="https://formsubmit.co/b84e7964e899c2f2a2aa978e912e3ad0" method="POST"> 
+        <form id="contact-form" action="https://formsubmit.co/b84e7964e899c2f2a2aa978e912e3ad0" method="POST">
+            <input type="hidden" name="_url" value="https://wiseetwo.github.io/home.html/">
+
+            <!--Honeypot-->
+            <input type="text" name="_honey" style="display: none;">
+
+            <!--Disable Captcha-->
+            <input type="hidden" name="_captcha" value="false">
+
             <h1>Contact Us</h1> 
             <label for="name">Name:</label> 
-            <input type="text" id="name" name="name" required placeholder="Your Name"> 
+            <input type="text" id="name" name="Name" required placeholder="Your Name"> 
             
             <label for="email">Email:</label> 
-            <input type="email" id="email" name="email" required placeholder="Your Email"> 
+            <input type="email" id="email" name="E-mail" required placeholder="Your E-mail"> 
             
             <label for="message">Message:</label> 
-            <textarea id="message" name="message" rows="4" required placeholder="What are you intrested in?"></textarea> 
+            <textarea id="message" name="Message" rows="4" required placeholder="What are you intrested in?"></textarea> 
             
             <input type="submit" value="Submit"> 
         </form> 
